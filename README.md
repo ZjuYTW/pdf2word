@@ -8,7 +8,7 @@
 
 * clone或下载项目到本地
 ```python
-git clone git@github.com:simpleapples/pdf2word.git
+git clone https://github.com/ZjuYTW/pdf2word.git
 ```
 
 * 进入项目目录，建立虚拟环境，并安装依赖
