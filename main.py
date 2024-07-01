@@ -12,6 +12,10 @@ def pdf_to_word(pdf_file_path, word_file_path):
     cv.convert(word_file_path)
     cv.close()
 
+def cb(worker):
+    if exception := worker.exception():
+        logging.error(f'执行失败 {exception}')
+
 
 def main():
     logging.getLogger().setLevel(logging.ERROR)
@@ -30,7 +34,7 @@ def main():
             pdf_file = config["pdf_folder"] + "/" + file
             word_file = config["word_folder"] + "/" + file_name + ".docx"
             print("正在处理: ", file)
-            result = executor.submit(pdf_to_word, pdf_file, word_file)
+            result = executor.submit(pdf_to_word, pdf_file, word_file).add_done_callback(cb)
             tasks.append(result)
     while True:
         exit_flag = True
